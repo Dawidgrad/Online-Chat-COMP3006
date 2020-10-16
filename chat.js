@@ -1,4 +1,11 @@
-import { Message } from './message';
+class Message {
+	constructor(contents, sender, recipient, date) {
+		this.contents = contents;
+		this.sender = sender;
+		this.recipient = recipient;
+		this.date = date;
+	}
+}
 
 $(() => {
 	$('#submit-button').prop('disabled', true);
@@ -15,9 +22,10 @@ $(() => {
 		}
 	});
 
-	$('#send-message').click(() => {
-		const contents = $('#message-field').html();
+	$('#submit-button').click(() => {
+		const contents = $('#message-field').val();
 		const message = new Message(contents, 'Person 1', 'Person 2', new Date());
+
 		console.log(`Message: ${message.contents}`);
 		console.log(`Sender: ${message.sender}`);
 		console.log(`Recipient: ${message.recipient}`);
