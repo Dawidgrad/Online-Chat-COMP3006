@@ -10,6 +10,12 @@ class Message {
 $(() => {
 	$('#submit-button').prop('disabled', true);
 
+	const draftMessage = localStorage.getItem('draft-message')
+
+	if (draftMessage !== null) {
+		$('#message-field').html(draftMessage);
+	}
+
 	// Detect change in text area
 	$('#message-field').on('keyup', () => {
 		// Enable button if text present
@@ -20,6 +26,8 @@ $(() => {
 		if ($('#message-field').val() === '') {
 			submitButton.prop('disabled', true);
 		}
+
+		localStorage.setItem('draft-message', $('#message-field').val());
 	});
 
 	$('#submit-button').click(() => {
@@ -30,5 +38,7 @@ $(() => {
 		console.log(`Sender: ${message.sender}`);
 		console.log(`Recipient: ${message.recipient}`);
 		console.log(`Date: ${message.date}`);
+
+		localStorage.removeItem('draft-message');
 	});
 });
